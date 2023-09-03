@@ -1,105 +1,66 @@
-// // var items= document.getElementsByClassName('list-group-item');
-// // console.log(items);
-// // console.log(items[1]);
-// // items[1].textContent = 'Hellow 2';
-// // item[1].style.fontWeight = 'bold';
-// // item[1].style.backgroundColor = 'yellow';
+var form = document.getElementById('addForm');
+var itemList =document.getElementById('items');
+
+//form submit event 
+
+form.addEventListener('submit',addItem);
+//delete event
+
+itemList.addEventListener('click' , removeItem);
+
+//addItem
+
+function addItem(e)
+{
+    e.preventDefault();
+    
+
+    //get input value
+
+    var newItem = document.getElementById('item').value;
+    
+
+    // create new li element
+
+    var li = document.createElement('li');
+    //add class 
+    li.className = 'list-group-item';
+    console.log(li)
+
+    //add text node with input value
+
+    li.appendChild(document.createTextNode(newItem));
+
+    //create delete button element
+
+    var deleteBtn = document.createElement('button');
+
+    //add class to del button 
+
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete'
+    
+    // append text node 
+
+    deleteBtn.appendChild(document.createTextNode('X'));
+
+    // append delete button 
+    li.appendChild(deleteBtn);
+    
+    itemList.appendChild(li);
 
 
-// // for(var i=0;i<items.length;i++)
-// // {
-// //     item[i].style.backgroundColor = '#f4f4f4';
+}
 
+//remove item
 
-// // }
-
-
- var itemList = document.querySelector('#items');
-// console.log(itemList);
-
-// //parentELement
-// console.log(itemList.parentElement.parentElement.parentElement)
-
-// itemList.parentElement.style.backgroundColor = '#f4f4f4';
-
-// console.log(itemList.parentElement.parentElement.parentElement);
-
-
-// //child nodes
-
-// console.log(itemList.childNodes);
-// console.log(itemList.children);
-// console.log(itemList.children[1]);
-// itemList.children[1].style.backgroundColor = 'yellow';
-
-// //first child 
-
-// // console.log(itemList.firstChild);
-
-// // // first element child
-
-// // console.log(itemList.firstElementChild);
-// // itemList.firstElementChild.textContent = 'Hellow 1';
-
-
-// //last child 
-// console.log(itemList.lastChild);
-
-// // last  element child
-
-// console.log(itemList.lastElementChild);
-// itemList.lastElementChild.textContent = 'Hellow 4';
-
-
-
-// next sibling
-
-//console.log(itemList.nextSibling);
-
-
-// next element sibling
-
-//console.log(itemList.nextElementSibling);
-
-
-// previous sibling 
-
-//console.log(itemList.previousSibling);
-
-//previousElementSibling
-
-//console.log(itemList.previousElementSibling);
-
-//itemList.previousElementSibling.style.color = 'green';
-
- 
-// createElement 
-
-// create a div
-
-var newDiv =document.createElement('div');
-// add class 
-newDiv.className = 'hellow'; 
-
-// add id
-
-newDiv.id = 'hellow1';
-
-// add attribute
-
-newDiv.setAttribute('title' , 'Hellow Div');
-
-//create a text node 
-
-var newDivText = document.createTextNode('Hellow World');
-
-// add text to div
-
-newDiv.appendChild(newDivText);
-
-var container = document.querySelector  ('header.container');
-var h1 =document.querySelector('header h1');
-
-console.log(newDiv);
-newDiv.style.fontSize = '30px';
-container.insertBefore(newDiv, h1);
+function removeItem(e)
+{
+    if(e.target.classList.contains('delete'))
+    {
+        if(confirm('Are you Sure?'))
+        {
+            var li = e.target.parentElement;     
+            itemList.removeChild(li); 
+        }
+    }
+}
