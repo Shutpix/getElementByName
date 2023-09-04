@@ -1,15 +1,15 @@
 var form = document.getElementById('addForm');
 var itemList =document.getElementById('items');
+var filter =document.getElementById('fi lter')
 
 //form submit event 
-
 form.addEventListener('submit',addItem);
 //delete event
-
 itemList.addEventListener('click' , removeItem);
+//filter event 
+itemList.addEventListener('keyup', filterItems);
 
 //addItem
-
 function addItem(e)
 {
     e.preventDefault();
@@ -63,4 +63,29 @@ function removeItem(e)
             itemList.removeChild(li); 
         }
     }
+}
+
+//filter items
+function filterItems(e)
+{
+     //convert text to lower case
+    var text =e.target.value.toLowerCase(); 
+
+    // get lis
+    var items = itemList.getElementsByTagName('li');
+
+    //convert to array
+
+    Array.from(items).forEach(function(item)
+    {
+        var itemName = item.firstChild.textContent;
+        const description = item.childNodes[1].textContent;
+        if(itemName.toLowerCase().indexOf(text) !=- 1 || description.toLocaleLowerCase().indexOf(text))
+        {
+            item.style.display = 'block'; 
+        }
+        else{
+            item.style.display = 'none';
+        }
+    });
 }
